@@ -31,19 +31,19 @@
 				<extensions>true</extensions>
 				<configuration>
 					<cloudHubDeployment>
-					    <uri>https://anypoint.mulesoft.com</uri>
-					    <muleVersion>${mule.version}</muleVersion>
-					    <!-- Deploy User Parameter -->
-					    <username>${anypoint.username}</username>
-					    <password>${anypoint.password}</password>
-					    <!-- Environment Parameter -->
-					    <environment>${cloudhub.environment}</environment>
-					    <applicationName>${cloudhub.app}</applicationName>
-					    <businessGroup>${cloudhub.bg}</businessGroup>
-					    <workerType>${cloudhub.worker}</workerType>
-					    <objectStoreV2>true</objectStoreV2>
+						<uri>https://anypoint.mulesoft.com</uri>
+						<muleVersion>${mule.version}</muleVersion>
+						<!-- Deploy User Parameter -->
+						<username>${anypoint.username}</username>
+						<password>${anypoint.password}</password>
+						<!-- Environment Parameter -->
+						<environment>${cloudhub.environment}</environment>
+						<applicationName>${cloudhub.app}</applicationName>
+						<businessGroup>${cloudhub.bg}</businessGroup>
+						<workerType>${cloudhub.worker}</workerType>
+						<objectStoreV2>true</objectStoreV2>
 					</cloudHubDeployment>
-				</configuration> 
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -74,12 +74,6 @@
 			<classifier>mule-plugin</classifier>
 		</dependency>
 		<dependency>
-			<groupId>c0b186e4-3a75-4394-ae6d-1a2aa465d90d</groupId>
-			<artifactId>json-logger</artifactId>
-			<version>2.0.1</version>
-			<classifier>mule-plugin</classifier>
-		</dependency>
-		<dependency>
 			<groupId>org.mule.connectors</groupId>
 			<artifactId>mule-sockets-connector</artifactId>
 			<version>1.1.5</version>
@@ -97,6 +91,12 @@
 			<version>1.0.0</version>
 			<classifier>raml</classifier>
 			<type>zip</type>
+		</dependency>
+		<dependency>
+			<groupId>b3f7f859-f414-48c7-9aae-96c5a523fd3e</groupId>
+			<artifactId>json-logger</artifactId>
+			<version>2.0.1</version>
+			<classifier>mule-plugin</classifier>
 		</dependency>
 	</dependencies>
 
