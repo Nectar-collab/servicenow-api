@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:servicenow="http://www.mulesoft.org/schema/mule/servicenow" xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd
+http://www.mulesoft.org/schema/mule/servicenow http://www.mulesoft.org/schema/mule/servicenow/current/mule-servicenow.xsd">
+	<json-logger:config name="JSON_Logger_Config" doc:name="JSON Logger Config" doc:id="3dfe084c-ee47-4a8a-b82b-1c92326419d1" applicationName="${jlog.applicationname}" applicationVersion="${jlog.applicationversion}" environment="${jlog.env}" />
+	<configuration-properties doc:name="Configuration properties" doc:id="66853232-df3d-4f4c-ba54-62a43ec96817" file="config.yaml" />
+	<servicenow:config name="ServiceNow_Config" doc:name="ServiceNow Config" doc:id="48749447-d631-45ef-9b77-dacfd233f1a8" >
+		<servicenow:basic-connection username="${SNOW.username}" password="${SNOW.password}" serviceAddress="${SNOW.serviceAddress}"/>
+	</servicenow:config>
+</mule>

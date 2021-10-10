@@ -1,0 +1,9 @@
+jlog:
+  applicationname: "mytrain-incident-api"
+  applicationversion: "1.0.0-SNAPSHOT"
+  env: "SANDBOX"
+
+SNOW:
+  username: "admin"
+  password: "ldKBh3uHcO9H"
+  serviceAddress: "https://dev64035.service-now.com/"
