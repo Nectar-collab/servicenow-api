@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="implementation-test-suite.xml" />
+	<munit:test name="implementation-test-suite-postIncidentTest" doc:id="7fe896fc-7fac-4118-b8a0-b44b082b1314" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to postIncident" doc:id="dfd00403-006b-45bf-a10b-b0261b7f51d0" name="postIncident"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="1014686b-9fb5-453a-859e-afcf4c2ebddd" expression="#[payload]" is="#[MunitTools::notNullValue()]" message="Payload is null"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
