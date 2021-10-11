@@ -36,5 +36,22 @@ payload]]></ee:set-payload>
 			</ee:message>
 		</ee:transform>
 		<json-logger:logger doc:name="Logger" doc:id="89d11159-d2d1-4be9-a74b-4421ff0a3880" config-ref="JSON_Logger_Config" message="#['JSON Logger']"/>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="be2b5af4-1995-4691-9411-247b4794a3a9" type="SERVICENOW:BAD_REQUEST, SERVICENOW:BAD_RESPONSE, SERVICENOW:CANNOT_DISPATCH, SERVICENOW:ENCODING, SERVICENOW:INVALID_WSDL, SERVICENOW:SOAP_FAULT, SERVICENOW:TIMEOUT" >
+				<ee:transform doc:name="Transform Message" doc:id="e93b86e2-1692-4a3b-a6fd-83bae540d327" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"Type":error.errorType,
+	"Description":error.description
+	
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+				<json-logger:logger doc:name="Logger" doc:id="bdf47349-7c4a-4949-9a48-bcf5375a6e55" config-ref="JSON_Logger_Config" message="#['JSON Message']" />
+			</on-error-propagate>
+		</error-handler>
 	</flow>
 </mule>

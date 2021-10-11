@@ -7,3 +7,10 @@ SNOW:
   username: "admin"
   password: "ldKBh3uHcO9H"
   serviceAddress: "https://dev64035.service-now.com/"
+  
+incidentapi:
+  host: "localhost"
+  port: "8083"
+  protocol: "HTTP"
+  basepath: "api"
+  

@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:servicenow="http://www.mulesoft.org/schema/mule/servicenow" xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger"
-	xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+<mule xmlns:incident-api="http://www.mulesoft.org/schema/mule/incident-api" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:servicenow="http://www.mulesoft.org/schema/mule/servicenow"
+	xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd
-http://www.mulesoft.org/schema/mule/servicenow http://www.mulesoft.org/schema/mule/servicenow/current/mule-servicenow.xsd">
+http://www.mulesoft.org/schema/mule/servicenow http://www.mulesoft.org/schema/mule/servicenow/current/mule-servicenow.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/incident-api http://www.mulesoft.org/schema/mule/incident-api/current/mule-incident-api.xsd">
 	<json-logger:config name="JSON_Logger_Config" doc:name="JSON Logger Config" doc:id="3dfe084c-ee47-4a8a-b82b-1c92326419d1" applicationName="${jlog.applicationname}" applicationVersion="${jlog.applicationversion}" environment="${jlog.env}" />
 	<configuration-properties doc:name="Configuration properties" doc:id="66853232-df3d-4f4c-ba54-62a43ec96817" file="config.yaml" />
 	<servicenow:config name="ServiceNow_Config" doc:name="ServiceNow Config" doc:id="48749447-d631-45ef-9b77-dacfd233f1a8" >
 		<servicenow:basic-connection username="${SNOW.username}" password="${SNOW.password}" serviceAddress="${SNOW.serviceAddress}"/>
 	</servicenow:config>
+	<error-handler name="globalError_Handler" doc:id="da24b20a-4554-4deb-b1d9-ff5b8000aafd" >
+		<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="5d97d5bc-b452-4c6c-98f6-00f528962906" type="SERVICENOW:CONNECTIVITY" >
+			<ee:transform doc:name="Transform Message" doc:id="e164aeb9-f651-4f32-bb31-5d87dbff2ac0" >
+				<ee:message >
+					<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"Type":error.errorType,
+	"Description":error.description
+	
+}]]></ee:set-payload>
+				</ee:message>
+			</ee:transform>
+			<json-logger:logger doc:name="Logger" doc:id="8293c013-643e-46bf-9faf-277d975a8670" config-ref="JSON_Logger_Config" message="#['JSON Message']" />
+		</on-error-propagate>
+	</error-handler>
 </mule>
