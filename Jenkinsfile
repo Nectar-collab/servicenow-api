@@ -27,7 +27,7 @@ pipeline {
         APP_NAME = 'sandbox-incident-api-sk'
       }
       steps {
-            bat 'mvn -U -V -e -B -DskipTests deploy -DmuleDeploy -Dmule.version='4.3.0' -Danypoint.username='sudhaoct' -Danypoint.password='Anypoint@2147' -Dcloudhub.app='sandbox-incident-api-sk' -Dcloudhub.environment='Sandbox' -Dcloudhub.bg='NJC' -Dcloudhub.worker="Micro"'
+            bat 'mvn -U -V -e -B -DskipTests deploy -DmuleDeploy -Dmule.version="4.3.0" -Danypoint.username="sudhaoct" -Danypoint.password='Anypoint@2147' -Dcloudhub.app='sandbox-incident-api-sk' -Dcloudhub.environment='Sandbox' -Dcloudhub.bg='NJC' -Dcloudhub.worker="Micro"'
       }
     }
     stage('Deploy Production') {
