@@ -7,13 +7,36 @@
 		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
 		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
 		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
-	<munit:config name="implementation-test-suite.xml" />
+	<munit:config name="implementation-test-suite.xml" >
+		<munit:parameterizations >
+			<munit:parameterization name="createIncident" >
+				<munit:parameters >
+					<munit:parameter propertyName="input" value="#[output application/json --- readUrl('classpath://testdata\postIncident.json')]" />
+					<munit:parameter propertyName="output" value="#[output application/json --- readUrl('classpath://testdata\output.json')]" />
+				</munit:parameters>
+			</munit:parameterization>
+		</munit:parameterizations>
+	</munit:config>
 	<munit:test name="implementation-test-suite-postIncidentTest" doc:id="7fe896fc-7fac-4118-b8a0-b44b082b1314" description="Test">
+		<munit:behavior>
+			<set-payload value="${input}" doc:name="Set Payload" doc:id="fcf823cc-eaf1-4703-b831-4c3c5786dd11" />
+		</munit:behavior>
 		<munit:execution >
 			<flow-ref doc:name="Flow-ref to postIncident" doc:id="dfd00403-006b-45bf-a10b-b0261b7f51d0" name="postIncident"/>
 		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="25e3bbb4-ffeb-4c53-a964-7c022849f953" message="Payload should be passed" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="implementation-test-suite-postIncidentTest1" doc:id="2c43b78d-30ce-4059-97b9-8e58af226a57" description="Test">
+		<munit:behavior >
+			<set-payload value="${output}" doc:name="Set Payload" doc:id="670c1209-6438-40f3-b19b-bfbde610965f" />
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to postIncident" doc:id="26cc035f-c107-4c19-bf70-ba567d54f275" name="postIncident"/>
+		</munit:execution>
 		<munit:validation >
-			<munit-tools:assert-that doc:name="Assert that" doc:id="1014686b-9fb5-453a-859e-afcf4c2ebddd" expression="#[payload]" is="#[MunitTools::notNullValue()]" message="Payload is null"/>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="6fa98fbb-dd98-42b9-9bd6-194541501a47" message="Error in creating incident in ServiceNow" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
 		</munit:validation>
 	</munit:test>
 
