@@ -32,17 +32,15 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-					<cloudHubDeployment>
+					 <cloudHubDeployment>
 						<uri>https://anypoint.mulesoft.com</uri>
-						<muleVersion>${mule.version}</muleVersion>
-						<!-- Deploy User Parameter -->
-						<username>${anypoint.username}</username>
-						<password>${anypoint.password}</password>
-						<!-- Environment Parameter -->
-						<environment>${cloudhub.environment}</environment>
-						<applicationName>${cloudhub.app}</applicationName>
-						<businessGroupId>${cloudhub.bg}</businessGroupId>
-						<workerType>${cloudhub.worker}</workerType>
+						<username>sudhaoct</username>
+						<password>Anypoint@2147</password>
+						<environment>Sandbox</environment>
+						<workers>1</workers>
+						<applicationName>NRE-userDetServices</applicationName>
+						<muleVersion>4.3.0</muleVersion>
+						<workerType>Micro</workerType>
 						<objectStoreV2>true</objectStoreV2>
 					</cloudHubDeployment>
 				</configuration>
