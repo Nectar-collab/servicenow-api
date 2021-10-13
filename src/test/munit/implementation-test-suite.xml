@@ -28,17 +28,6 @@
 			<munit-tools:assert-that doc:name="Assert that" doc:id="25e3bbb4-ffeb-4c53-a964-7c022849f953" message="Payload should be passed" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
 		</munit:validation>
 	</munit:test>
-	<munit:test name="implementation-test-suite-postIncidentTest1" doc:id="2c43b78d-30ce-4059-97b9-8e58af226a57" description="Test">
-		<munit:behavior >
-			<set-payload value="${output}" doc:name="Set Payload" doc:id="670c1209-6438-40f3-b19b-bfbde610965f" />
-		</munit:behavior>
-		<munit:execution >
-			<flow-ref doc:name="Flow-ref to postIncident" doc:id="26cc035f-c107-4c19-bf70-ba567d54f275" name="postIncident"/>
-		</munit:execution>
-		<munit:validation >
-			<munit-tools:assert-that doc:name="Assert that" doc:id="6fa98fbb-dd98-42b9-9bd6-194541501a47" message="Error in creating incident in ServiceNow" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
-		</munit:validation>
-	</munit:test>
 
 
 </mule>
