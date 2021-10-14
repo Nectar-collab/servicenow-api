@@ -7,6 +7,8 @@ pipeline {
     MULE_VERSION = "4.3.0"
     BG = "NJC"
     WORKER = "Micro"
+	ENVIRONMENT = 'Sandbox'
+	APP_NAME = 'sandbox-incident-api-sk'
   }
   stages {
     stage('Build') {
@@ -16,10 +18,6 @@ pipeline {
     }
 
 	stage('Deploy Development') {
-	  environment {
-		ENVIRONMENT = 'Sandbox'
-		APP_NAME = 'sandbox-incident-api-sk'
-			}
 	  steps {
             bat 'mvn -U -V -e -B -DskipTests deploy -DmuleDeploy -Dmule.version="%MULE_VERSION%" -Danypoint.username="%DEPLOY_CREDS_USR%" -Danypoint.password="%DEPLOY_CREDS_PSW%" -Dcloudhub.app="%APP_NAME%" -Dcloudhub.environment="%ENVIRONMENT%" -Dcloudhub.bg="%BG%" -Dcloudhub.worker="%WORKER%"'
       	}
