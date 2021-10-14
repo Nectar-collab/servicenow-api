@@ -33,18 +33,19 @@
 				<extensions>true</extensions>
 				<configuration>
 					<cloudHubDeployment>
-						<uri>https://anypoint.mulesoft.com</uri>
-						<muleVersion>${mule.version}</muleVersion>
-						<!-- Deploy User Parameter -->
-						<username>sudhaoct</username>
-						<password>Anypoint2147</password>
-						<!-- Environment Parameter -->
-						<environment>${cloudhub.environment}</environment>
-						<applicationName>${cloudhub.app}</applicationName>
-						<businessGroupId>${cloudhub.bg}</businessGroupId>
-						<workerType>${cloudhub.worker}</workerType>
-						<objectStoreV2>true</objectStoreV2>
+							<uri>https://anypoint.mulesoft.com</uri>
+							<muleVersion>4.3.0</muleVersion>
+							<!-- Deploy User Parameter -->
+							<username>sudhaoct</username>
+							<password>Anypoint2147</password>
+							<!-- Environment Parameter -->
+							<environment>Sandbox</environment>
+							<applicationName>mytrain-incident-api-sk</applicationName>
+							<businessGroup>NJC</businessGroup>
+							<workerType>Micro</workerType>
+							<objectStoreV2>true</objectStoreV2>
 					</cloudHubDeployment>
+
 				</configuration>
 			</plugin>
 			<plugin>
