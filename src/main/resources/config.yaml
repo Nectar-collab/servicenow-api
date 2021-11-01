@@ -5,8 +5,8 @@ jlog:
 
 SNOW:
   username: "admin"
-  password: "ldKBh3uHcO9H"
-  serviceAddress: "https://dev64035.service-now.com/"
+  password: "![DTeY+Jhthe/0l7/s8RCXlg==]"  
+  serviceAddress: "https://dev107321.service-now.com/"
   
 incidentapi:
   host: "localhost"
