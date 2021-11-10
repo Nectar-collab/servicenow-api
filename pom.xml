@@ -31,9 +31,25 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
+				<!-- Jenkins pipeline deployment credentials -->
+					<!--  <cloudHubDeployment>
+						<uri>https://anypoint.mulesoft.com</uri>
+						<muleVersion>${mule.version}</muleVersion>-->
+						<!-- Deploy User Parameter -->
+						<!-- <username>${anypoint.username}</username>
+						<password>${anypoint.password}</password>-->
+						<!-- Environment Parameter -->
+						<!-- <environment>${cloudhub.environment}</environment>
+						<applicationName>${cloudhub.app}</applicationName>
+						<businessGroup>${cloudhub.bg}</businessGroup>
+						<workerType>${cloudhub.worker}</workerType>
+						<objectStoreV2>true</objectStoreV2>
+					</cloudHubDeployment>-->
+					<!-- Azure pipeline deployment credentials -->
 					<cloudHubDeployment>
 						<uri>https://anypoint.mulesoft.com</uri>
 						<muleVersion>${mule.version}</muleVersion>
+						<server>${cloudhub.server}</server>
 						<!-- Deploy User Parameter -->
 						<username>${anypoint.username}</username>
 						<password>${anypoint.password}</password>
