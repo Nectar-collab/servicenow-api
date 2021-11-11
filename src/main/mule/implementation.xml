@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:servicenow="http://www.mulesoft.org/schema/mule/servicenow"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/servicenow http://www.mulesoft.org/schema/mule/servicenow/current/mule-servicenow.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd">
+	<flow name="postIncident" doc:id="374f9da5-d468-4a71-bfc3-69cc87b44d4c" >
+		<json-logger:logger doc:name="Logger" doc:id="6238c107-f9c2-4971-b25b-9632acceca6b" config-ref="JSON_Logger_Config" message="#['JSON Logger']"/>
+		<ee:transform doc:name="Transform Message" doc:id="2f5fdf4d-28a1-4295-8c36-59c4663c012a" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/xml
+ns ns0 http://www.service-now.com/incident
+---
+{
+	ns0#insert: {
+		caller_id: payload.caller,
+		closed_at: payload.closed,
+		opened_at: payload.opened,
+		short_description: payload."short description",
+		state: payload.state as Number,
+		urgency: payload.urgency as Number
+	}
+}]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<servicenow:invoke doc:name="Invoke" doc:id="5b7d11b3-dbb3-46e5-ad15-0c5e37384948" config-ref="ServiceNow_Config" service="incident" operation="insert"/>
+		<ee:transform doc:name="Transform Message" doc:id="be92a2bc-557a-4ade-9062-30c4445bb526" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<json-logger:logger doc:name="Logger" doc:id="89d11159-d2d1-4be9-a74b-4421ff0a3880" config-ref="JSON_Logger_Config" message="#['JSON Logger']"/>
+		<error-handler >
+			<on-error-propagate enableNotifications="true" logException="true" doc:name="On Error Propagate" doc:id="be2b5af4-1995-4691-9411-247b4794a3a9" type="SERVICENOW:BAD_REQUEST, SERVICENOW:BAD_RESPONSE, SERVICENOW:CANNOT_DISPATCH, SERVICENOW:ENCODING, SERVICENOW:INVALID_WSDL, SERVICENOW:SOAP_FAULT, SERVICENOW:TIMEOUT" >
+				<ee:transform doc:name="Transform Message" doc:id="e93b86e2-1692-4a3b-a6fd-83bae540d327" >
+					<ee:message >
+						<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+{
+	"Type":error.errorType,
+	"Description":error.description
+	
+}]]></ee:set-payload>
+					</ee:message>
+				</ee:transform>
+				<json-logger:logger doc:name="Logger" doc:id="bdf47349-7c4a-4949-9a48-bcf5375a6e55" config-ref="JSON_Logger_Config" message="#['JSON Message']" />
+			</on-error-propagate>
+		</error-handler>
+	</flow>
+</mule>

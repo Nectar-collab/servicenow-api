@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="implementation-test-suite.xml" >
+		<munit:parameterizations >
+			<munit:parameterization name="createIncident" >
+				<munit:parameters >
+					<munit:parameter propertyName="input" value="#[output application/json --- readUrl('classpath://testdata\postIncident.json')]" />
+					<munit:parameter propertyName="output" value="#[output application/json --- readUrl('classpath://testdata\output.json')]" />
+				</munit:parameters>
+			</munit:parameterization>
+		</munit:parameterizations>
+	</munit:config>
+	<munit:test name="implementation-test-suite-postIncidentTest" doc:id="7fe896fc-7fac-4118-b8a0-b44b082b1314" description="Test">
+		<munit:behavior>
+			<set-payload value="${input}" doc:name="Set Payload" doc:id="fcf823cc-eaf1-4703-b831-4c3c5786dd11" />
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to postIncident" doc:id="dfd00403-006b-45bf-a10b-b0261b7f51d0" name="postIncident"/>
+		</munit:execution>
+		<munit:validation>
+			<munit-tools:assert-that doc:name="Assert that" doc:id="25e3bbb4-ffeb-4c53-a964-7c022849f953" message="Payload should be passed" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

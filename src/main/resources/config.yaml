@@ -1,0 +1,16 @@
+jlog:
+  applicationname: "mytrain-incident-api"
+  applicationversion: "1.0.0-SNAPSHOT"
+  env: "SANDBOX"
+
+SNOW:
+  username: "admin"
+  password: "![DTeY+Jhthe/0l7/s8RCXlg==]"  
+  serviceAddress: "https://dev107321.service-now.com/"
+  
+incidentapi:
+  host: "localhost"
+  port: "8083"
+  protocol: "HTTP"
+  basepath: "api"
+  
