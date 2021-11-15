@@ -52,4 +52,4 @@ steps:
     jdkArchitectureOption: 'x64'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'clean install package deploy $(MAVEN_OPTS) -DmuleDeploy -Dmule.version="4.3.0" -Dserver=$(server) -Denvironment=$(environment) -Dworker=$(worker) -Dusername=$(username) -Dpassword=$(password) -Dapp=$(app) -Dbg=$(bg) -Dversion=$(version) -DskipTests'
+    goals: 'clean install package -DskipTests deploy $(MAVEN_OPTS) -DmuleDeploy -Dserver=$(server) -Denvironment=$(environment) -Dworker=$(worker) -Dusername=$(username) -Dpassword=$(password) -D$(app.name)=$(app.name) -Dbg=$(bg) -Dapp.runtime=$(app.runtime)'
