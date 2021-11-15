@@ -55,7 +55,7 @@
 						<password>${password}</password>
 						<!-- Environment Parameter -->
 						<environment>${environment}</environment>
-						<applicationName>${app}</applicationName>
+						<applicationName>${app.name}</applicationName>
 						<businessGroup>${bg}</businessGroup>
 						<workerType>${worker}</workerType>
 						<objectStoreV2>true</objectStoreV2>
