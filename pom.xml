@@ -48,7 +48,7 @@
 					<!-- Azure pipeline deployment credentials -->
 					<cloudHubDeployment>
 						<uri>https://anypoint.mulesoft.com</uri>
-						<muleVersion>${version}</muleVersion>
+						<muleVersion>${app.runtime}</muleVersion>
 						<server>${server}</server>
 						<!-- Deploy User Parameter -->
 						<username>${username}</username>
